@@ -1,5 +1,4 @@
 import { defineConfig, devices } from '@playwright/test';
-// @ts-ignore
 import dotenv from 'dotenv';
 dotenv.config();
 

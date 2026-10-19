@@ -26,7 +26,7 @@ import { test, expect } from "@playwright/test"
 test("Page has heading", async ( { page }) => {
    //Navigate to page
    await page.goto( "https://example.com/" );
-
+   
    //Locate
    // let heading = await page.getByRole("heading"); --> wrong. getByRole doesn't need await, it doesn't perform an asynchronous browser function so..
     const heading = page.getByRole("heading");
