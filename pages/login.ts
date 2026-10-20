@@ -13,7 +13,8 @@ export class LoginPage {
         this.username = page.getByPlaceholder("Username");
         this.password = page.getByPlaceholder("Password");
         this.loginButton = page.getByRole("button", { name: "Login"});
-        this.errorMessage = page.locator('[data-test="error"]');
+        // this.errorMessage = page.locator('[data-test="error"]');
+        this.errorMessage = page.getByTestId("error")
         this.page = page;
         // console.log('LoginPage received page', page)
     }

@@ -74,11 +74,61 @@ test("Authenticated user can access inventory page", async( {page} ) => {
 })
 
 
-test("login", async( {page} ) => {
-    const loginPage = new LoginPage(page);
-
+test("locked out user login", async( {page, loginPage} ) => {
     await loginPage.login(users.locked_out_user.username,users.locked_out_user.password);
-    expect(users.locked_out_user.expectedError).not.toBeNull();
+    const expected = users.locked_out_user.expectedError;
+    const error = loginPage.errorMessage;
+
+    if(!expected){ throw new Error("Locked out user does not have ExpectedError atrribute");}
+    await expect(error).toHaveText(expected);
 
 })
+
+/**
+ * Simple exercise to help build trust in your PASSED tests.
+ *
+ * 1) -> Break behaviour: basically switch up the app behaviour to gauge whether the app will notice i.e
+ *
+ * test("locked out user login", async( {page, loginPage} ) => {
+ *     await loginPage.login(users.standard_user.username,users.locked_out_user.password);
+ *     const expected = users.locked_out_user.expectedError;
+ *     const error = loginPage.errorMessage;
+ *
+ *     if(!expected){ throw new Error("Locked out user does not have ExpectedError atrribute");}
+ *     await expect(error).toHaveText(expected);
+ *
+ * })
+ *
+ * This test should fail with
+ * Error: expect(locator).toHaveText(expected) failed
+ *
+ * Locator: getByTestId('error')
+ * Expected: "Epic sadface: Sorry, this user has been locked out."
+ * Timeout: 5000ms
+ * Error: element(s) not found
+ *
+ * 2) -> Break expectation: Switch up what your are asserting against i.e
+ *
+ * test("locked out user login", async( {page, loginPage} ) => {
+ *     await loginPage.login(users.locked_out_user.username,users.locked_out_user.password);
+ *     const expected = users.locked_out_user.expectedError;
+ *     const error = loginPage.errorMessage;
+ *
+ *     if(!expected){ throw new Error("Locked out user does not have ExpectedError atrribute");}
+ *     await expect(error).toHaveText(expected);
+ *
+ * })
+ *
+ * This should fail as well with
+ *
+ * # Error details
+ *
+ * ```
+ * Error: expect(locator).toHaveText(expected) failed
+ *
+ * Locator:  getByTestId('error')
+ * Expected: "ted"
+ * Received: "Epic sadface: Sorry, this user has been locked out."
+ * Timeout:  5000ms
+ * **/
 
