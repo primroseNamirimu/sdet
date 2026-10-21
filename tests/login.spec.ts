@@ -80,7 +80,7 @@ test("locked out user login", async( {page, loginPage} ) => {
     const error = loginPage.errorMessage;
 
     if(!expected){ throw new Error("Locked out user does not have ExpectedError atrribute");}
-    await expect(error).toHaveText(expected);
+   await expect(error).toHaveText(expected);
 
 })
 
