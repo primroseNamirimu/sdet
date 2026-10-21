@@ -1,3 +1,5 @@
+import {users} from "../test-data/users";
+
 async function main() {
     console.log("A");
     const p = new Promise(resolve => setTimeout(() => resolve("B"), 1000));

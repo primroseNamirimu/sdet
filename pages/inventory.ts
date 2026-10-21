@@ -17,6 +17,8 @@ export class InventoryPage {
         this.productNames = page.getByTestId('inventory-item-name');
         this.productsReversed = page.getByTestId('product-sort-container');
         this.page = page;
+        
+        this.productNames.count()
         // console.log('Inventory page', page)
     }
 

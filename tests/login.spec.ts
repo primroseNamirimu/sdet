@@ -4,6 +4,7 @@ import { test } from "../fixtures/test"
 import { LoginPage } from "../pages/login";
 import { InventoryPage } from "../pages/inventory";
 import { users } from "../test-data/users";
+import {required} from "../utils/required";
 
 test.beforeEach( async ({ page }) => {
     await page.goto("https://www.saucedemo.com/");
@@ -74,13 +75,11 @@ test("Authenticated user can access inventory page", async( {page} ) => {
 })
 
 
-test("locked out user login", async( {page, loginPage} ) => {
+test("locked out user login", async( {loginPage} ) => {
     await loginPage.login(users.locked_out_user.username,users.locked_out_user.password);
-    const expected = users.locked_out_user.expectedError;
     const error = loginPage.errorMessage;
-
-    if(!expected){ throw new Error("Locked out user does not have ExpectedError atrribute");}
-   await expect(error).toHaveText(expected);
+    const expected = required(users.locked_out_user.expectedError,"Locked out user does not have ExpectedError atrribute in users.ts")
+    await expect(error).toHaveText(expected);
 
 })
 

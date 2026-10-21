@@ -19,7 +19,6 @@ test("Inventory page", async ({ page, loginPage}) => {
     await expect(page).toHaveURL(/inventory.html/);
     const inventoryPage = new InventoryPage(page);
     const pn = await inventoryPage.getProductNames()
-    console.log(pn)
 
 })
 
