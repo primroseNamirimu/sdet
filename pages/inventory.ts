@@ -7,7 +7,7 @@ export class InventoryPage {
     page:Page;
     productNames:Locator;
     productsReversed:Locator;
-    cartBadge
+    cartBadge:Locator;
 
     //get me these elements
 
