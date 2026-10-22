@@ -83,6 +83,16 @@ test("locked out user login", async( {loginPage} ) => {
 
 })
 
+test("user can log out", async ({ page, loginPage }) => {
+    await loginPage.login(users.standard_user.username, users.standard_user.password);
+    await page.getByRole("button", { name: "Open Menu" }).click();
+    await page.getByTestId("logout-sidebar-link").click();
+    await expect(page).toHaveURL("https://www.saucedemo.com/");
+    await expect(loginPage.loginButton).toBeVisible();
+});
+
+
+
 /**
  * Simple exercise to help build trust in your PASSED tests.
  *

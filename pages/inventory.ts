@@ -7,6 +7,7 @@ export class InventoryPage {
     page:Page;
     productNames:Locator;
     productsReversed:Locator;
+    cartBadge
 
     //get me these elements
 
@@ -16,9 +17,9 @@ export class InventoryPage {
         this.cart = page.getByTestId("shopping-cart-link");
         this.productNames = page.getByTestId('inventory-item-name');
         this.productsReversed = page.getByTestId('product-sort-container');
+        this.cartBadge = page.getByTestId("shopping-cart-badge")
         this.page = page;
-        
-        this.productNames.count()
+
         // console.log('Inventory page', page)
     }
 

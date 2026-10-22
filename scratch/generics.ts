@@ -1,4 +1,6 @@
-import {users} from "../test-data/users";
+import {User, users} from "../test-data/users";
+
+import {LoginPage} from "../pages/login";
 
 function firstAny(items: any[]): any {
     return items[0];
@@ -15,3 +17,8 @@ function first<T>(items: T[]): T {
 const u = first([users.standard_user]);
 //console.log(u.usernmae);
 console.log(u.username);
+
+ async function loginAs< T extends User > (loginPage: LoginPage, user: T){
+    await loginPage.login(user.username,user.password);
+}
+

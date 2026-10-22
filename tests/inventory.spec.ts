@@ -34,5 +34,20 @@ test("sort reverse", async ({ page, loginPage }) => {
 
     expect(reverse).toEqual(expected);
 
+})
+
+test("cart visibility", async ({ page, loginPage }) => {
+    await loginPage.login(users.standard_user.username, users.standard_user.password);
+    const inventoryPage = new InventoryPage(page);
+    await expect(page).toHaveURL(/inventory.html/);
+
+    // add item to cart and see badge appear
+    await page.getByTestId("add-to-cart-sauce-labs-bike-light").click();
+    // assert that it is 1
+    await expect(inventoryPage.cartBadge).toHaveText("1")
+
+    // remove item from cart
+    await page.getByTestId("remove-sauce-labs-bike-light").click();
+    await expect(inventoryPage.cartBadge).not.toBeVisible();  // works only if we are certain only one item was in our cart
 
 })
