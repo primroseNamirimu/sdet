@@ -5,7 +5,7 @@ import { InventoryPage } from "../pages/inventory";
 import { users } from "../test-data/users";
 
 test.beforeEach( async ({ page }) => {
-    await page.goto("https://www.saucedemo.com/");
+    await page.goto("https://www.saucedemo.com/inventory.html");
 })
 
 

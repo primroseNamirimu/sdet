@@ -15,9 +15,9 @@ as I learn. Target app: [SauceDemo](https://www.saucedemo.com).
 - [ ] storageState auth reuse
 
 ## Run locally
-npm install
-npx playwright install
-npx playwright test
+- npm install
+- npx playwright install
+- npx playwright test
 
 ## Design decisions
-(added as the project grows)
+- Used storageState so that I can remove repeated UI logins and isolate login failures to one setup step as well.
