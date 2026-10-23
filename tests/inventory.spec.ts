@@ -6,19 +6,26 @@ import { users } from "../test-data/users";
 
 test.beforeEach( async ({ page }) => {
     await page.goto("https://www.saucedemo.com/inventory.html");
-})
+});
 
 
 test("Inventory page", async ({ page, loginPage}) => {
 
     // Well we need to login first..? right? yes- but we are now using storageState
     const inventoryPage = new InventoryPage(page);
-    const pn = await inventoryPage.getProductNames()
+    // use a retrying assertion -> trick to use to differentiate the retrying assertions and the reads is
+    // a retrying assertion is basically "I need this locotar to have this, to be this... whereas for the reads
+    // it's more like "hey, is the locator that?, does it have this? ...something like that
+
+    await expect(inventoryPage.productNames).toHaveCount(6);
+    await inventoryPage.getProductNames();
 
 })
 
 test("sort reverse", async ({ page, loginPage }) => {
     const inventoryPage = new InventoryPage(page);
+    await expect(inventoryPage.productNames).toHaveCount(6);
+
     const alphabetical = await inventoryPage.getProductNames() // call this before we reverse
     const reverse = await inventoryPage.reverseSelect()
 
