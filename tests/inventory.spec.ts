@@ -11,21 +11,13 @@ test.beforeEach( async ({ page }) => {
 
 test("Inventory page", async ({ page, loginPage}) => {
 
-    // Well we need to login first..? right?
-
-    const login = await loginPage.login(users.standard_user.username, users.standard_user.password);
-
-    // or, just assert that we are on inventory page already
-    await expect(page).toHaveURL(/inventory.html/);
+    // Well we need to login first..? right? yes- but we are now using storageState
     const inventoryPage = new InventoryPage(page);
     const pn = await inventoryPage.getProductNames()
 
 })
 
 test("sort reverse", async ({ page, loginPage }) => {
-
-    await loginPage.login(users.standard_user.username, users.standard_user.password);
-    await expect(page).toHaveURL(/inventory.html/);
     const inventoryPage = new InventoryPage(page);
     const alphabetical = await inventoryPage.getProductNames() // call this before we reverse
     const reverse = await inventoryPage.reverseSelect()
@@ -37,9 +29,7 @@ test("sort reverse", async ({ page, loginPage }) => {
 })
 
 test("cart visibility", async ({ page, loginPage }) => {
-    await loginPage.login(users.standard_user.username, users.standard_user.password);
     const inventoryPage = new InventoryPage(page);
-    await expect(page).toHaveURL(/inventory.html/);
 
     // add item to cart and see badge appear
     await page.getByTestId("add-to-cart-sauce-labs-bike-light").click();

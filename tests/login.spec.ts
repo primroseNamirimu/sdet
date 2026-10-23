@@ -6,10 +6,20 @@ import { InventoryPage } from "../pages/inventory";
 import { users } from "../test-data/users";
 import {required} from "../utils/required";
 
+test.use({ storageState: { cookies:[], origins: []}});
+
 test.beforeEach( async ({ page }) => {
     await page.goto("https://www.saucedemo.com/");
 })
 
+// test("control test", async ({ page, loginPage }) => {
+//     await expect(loginPage.loginButton).toBeVisible();
+// })
+//
+// test("starts logged out(temporary check", async ({ page , loginPage}) => {
+//     await page.goto("https://www.saucedemo.com/inventory.html");
+//     await expect(loginPage.errorMessage).toHaveText("Epic sadface: You can only access '/inventory.html' when you are logged in.");
+// })
 
 // you can destructure the page alone
 test("User can successfully log in", async({ page }) => {
