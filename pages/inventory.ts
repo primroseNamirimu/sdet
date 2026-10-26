@@ -28,7 +28,7 @@ export class InventoryPage {
     }
 
     async reverseSelect(): Promise<string[]> {
-          await this.productsReversed.selectOption('za');
+          await this.productsReversed.selectOption('az');
         return await this.productNames.allTextContents();
 
     }
