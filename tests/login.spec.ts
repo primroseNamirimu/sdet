@@ -21,25 +21,14 @@ test.beforeEach( async ({ page }) => {
 //     await expect(loginPage.errorMessage).toHaveText("Epic sadface: You can only access '/inventory.html' when you are logged in.");
 // })
 
-// you can destructure the page alone
-test("User can successfully log in", async({ page }) => {
-
-    const loginPage = new LoginPage(page);
-
-    await loginPage.login(users.standard_user.username,users.standard_user.password);
-
-    await expect(page).toHaveURL(/inventory.html/);
-
-});
-
 // or destructure  both the page and the custom loginPage fixture
-test("successfully log in", async ({ loginPage,page }) => {
-    await loginPage.login("standard_user",'secret_sauce');
+test("User can successfully log in",{ tag: "@smoke"}, async ({ loginPage,page }) => {
+    await loginPage.login(users.standard_user.username,users.standard_user.password);
     await expect(page).toHaveURL(/inventory.html/)
 })
 
 
-test("User cannot log in with invalid credentials", async( {page} ) => {
+test("User cannot log in with invalid credentials", { tag: "@smoke"}, async( {page} ) => {
 
     const loginPage = new LoginPage(page);
 

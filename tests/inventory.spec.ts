@@ -35,7 +35,7 @@ test("sort reverse", async ({ page, loginPage }) => {
 
 })
 
-test("cart visibility", async ({ page, loginPage }) => {
+test("cart visibility",{tag: "@smoke" }, async ({ page, loginPage }) => {
     const inventoryPage = new InventoryPage(page);
 
     // add item to cart and see badge appear
