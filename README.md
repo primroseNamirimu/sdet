@@ -11,8 +11,8 @@ as I learn. Target app: [SauceDemo](https://www.saucedemo.com).
 - [x] Environment config (.env)
 - [ ] API tests
 - [ ] HTML reports and trace viewer
-- [ ] CI on every push (GitHub Actions)
-- [ ] storageState auth reuse
+- [x] CI on every push (GitHub Actions)
+- [x] storageState auth reuse
 
 ## Run locally
 - npm install

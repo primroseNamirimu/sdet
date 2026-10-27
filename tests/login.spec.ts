@@ -12,16 +12,7 @@ test.beforeEach( async ({ page }) => {
     await page.goto("https://www.saucedemo.com/");
 })
 
-// test("control test", async ({ page, loginPage }) => {
-//     await expect(loginPage.loginButton).toBeVisible();
-// })
-//
-// test("starts logged out(temporary check", async ({ page , loginPage}) => {
-//     await page.goto("https://www.saucedemo.com/inventory.html");
-//     await expect(loginPage.errorMessage).toHaveText("Epic sadface: You can only access '/inventory.html' when you are logged in.");
-// })
-
-// or destructure  both the page and the custom loginPage fixture
+// destructure  both the page and the custom loginPage fixture
 test("User can successfully log in",{ tag: "@smoke"}, async ({ loginPage,page }) => {
     await loginPage.login(users.standard_user.username,users.standard_user.password);
     await expect(page).toHaveURL(/inventory.html/)
