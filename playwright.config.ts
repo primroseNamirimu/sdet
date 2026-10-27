@@ -56,6 +56,7 @@ export default defineConfig({
     },
     {
       name: 'firefox',
+      grep: /@smoke/,
       use: { ...devices['Desktop Firefox'],
         storageState:"playwright/.auth/auth.json",
       },
@@ -64,6 +65,7 @@ export default defineConfig({
 
     {
       name: 'webkit',
+      grep: /@smoke/,
       use: { ...devices['Desktop Safari'],
         storageState:"playwright/.auth/auth.json",
       },
