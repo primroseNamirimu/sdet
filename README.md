@@ -10,7 +10,7 @@ as I learn. Target app: [SauceDemo](https://www.saucedemo.com).
 - [ ] Data-driven tests
 - [x] Environment config (.env)
 - [ ] API tests
-- [ ] HTML reports and trace viewer
+- [x] HTML reports and trace viewer
 - [x] CI on every push (GitHub Actions)
 - [x] storageState auth reuse
 
