@@ -1,9 +1,10 @@
-import { expect } from "@playwright/test"
+import {expect, Locator} from "@playwright/test"
 import { test } from "../fixtures/test"
 import { LoginPage } from "../pages/login";
 import { InventoryPage } from "../pages/inventory";
 import { users } from "../test-data/users";
 import {CartPage} from "../pages/cart";
+import {expectedPrices} from "../test-data/products";
 
 test.beforeEach( async ({ page }) => {
     await page.goto("https://www.saucedemo.com/inventory.html");
@@ -64,3 +65,11 @@ test("added item appears in cart", async ({ page }) => {
 
 
 })
+
+for ( const [name,price] of Object.entries(expectedPrices)) {
+    test(`${name} shows ${price}`, async ({ page }) => {
+        const item = page.getByTestId("inventory-item").filter({ hasText:name });
+        await expect ( item.getByTestId("inventory-item-price")).toHaveText(price);
+
+    });
+}
