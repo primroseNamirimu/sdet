@@ -6,6 +6,7 @@ import { InventoryPage } from "../pages/inventory";
 import { users } from "../test-data/users";
 import {required} from "../utils/required";
 
+
 test.use({ storageState: { cookies:[], origins: []}});
 
 test.beforeEach( async ({ page }) => {
