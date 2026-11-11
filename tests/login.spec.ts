@@ -20,9 +20,8 @@ test("User can successfully log in",{ tag: "@smoke"}, async ({ loginPage,page })
 })
 
 
-test("User cannot log in with invalid credentials", { tag: "@smoke"}, async( {page} ) => {
+test("User cannot log in with invalid credentials", { tag: "@smoke"}, async( {page, loginPage} ) => {
 
-    const loginPage = new LoginPage(page);
 
     await loginPage.login(users.invalid_user_login.username,users.invalid_user_login.password);
 
@@ -46,15 +45,12 @@ test("User cannot log in with invalid credentials", { tag: "@smoke"}, async( {pa
     await expect(loginPage.errorMessage).toHaveText("Epic sadface: Username and password do not match any user in this service");
 });
 
-test("Authenticated user can access inventory page", async( {page} ) => {
-    const loginPage = new LoginPage(page);
+test("Authenticated user can access inventory page", async( {page, loginPage, inventoryPage} ) => {
     await loginPage.login(users.standard_user.username,users.standard_user.password);
 
     await expect(page).toHaveURL(/inventory.html/);
 
     // Once this fails, does that mean that the below code will not work? or do we need an if clause....
-
-    const inventoryPage = new InventoryPage(page);
 
     console.log('Are they the same page', loginPage.page === inventoryPage.page);
 

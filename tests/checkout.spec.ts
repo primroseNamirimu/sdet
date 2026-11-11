@@ -9,9 +9,7 @@ test.beforeEach( async ({ page }) => {
 
 
 for( const [name,obj] of Object.entries(expectedErrorMessages)) {
-    test(`${name}`, async ({page}) => {
-        const checkoutPage = new CheckoutPage(page);
-
+    test(`${name}`, async ({checkoutPage}) => {
         await checkoutPage.fillCheckoutForm(obj)
         await expect(checkoutPage.errorMsg).toHaveText(obj.expectedError)
 

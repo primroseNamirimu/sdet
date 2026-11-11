@@ -10,10 +10,10 @@ test.beforeEach( async ({ page }) => {
 });
 
 
-test("Inventory page", async ({ page, loginPage}) => {
+test("Inventory page", async ({ page, inventoryPage}) => {
 
     // Well we need to login first..? right? yes- but we are now using storageState
-    const inventoryPage = new InventoryPage(page);
+
     // use a retrying assertion -> trick to use to differentiate the retrying assertions and the reads is
     // a retrying assertion is basically "I need this locotar to have this, to be this... whereas for the reads
     // it's more like "hey, is the locator that?, does it have this? ...something like that
@@ -23,8 +23,7 @@ test("Inventory page", async ({ page, loginPage}) => {
 
 })
 
-test("sort reverse", async ({ page, loginPage }) => {
-    const inventoryPage = new InventoryPage(page);
+test("sort reverse", async ({ page, inventoryPage }) => {
     await expect(inventoryPage.productNames).toHaveCount(6);
 
     const alphabetical = await inventoryPage.getProductNames() // call this before we reverse
@@ -36,8 +35,7 @@ test("sort reverse", async ({ page, loginPage }) => {
 
 })
 
-test("cart visibility",{tag: "@smoke" }, async ({ page, loginPage }) => {
-    const inventoryPage = new InventoryPage(page);
+test("cart visibility",{tag: "@smoke" }, async ({ page, inventoryPage }) => {
 
     // add item to cart and see badge appear
     await page.getByTestId("add-to-cart-sauce-labs-bike-light").click();
@@ -50,17 +48,15 @@ test("cart visibility",{tag: "@smoke" }, async ({ page, loginPage }) => {
 
 })
 
-test("added item appears in cart", async ({ page }) => {
-    const inventoryPage = new InventoryPage(page);
-    const cart = new CartPage(page)
+test("added item appears in cart", async ({ page, inventoryPage, cartPage }) => {
 
     await page.getByTestId("add-to-cart-sauce-labs-backpack").click();
     await expect(inventoryPage.cartBadge).toHaveText("1")
     await inventoryPage.cart.click()
     await expect(page).toHaveURL("/cart.html")  // are we really on the cart page
-    await expect(cart.checkoutButton).toBeVisible(); // double check.. doesn't hurt
+    await expect(cartPage.checkoutButton).toBeVisible(); // double check.. doesn't hurt
 
-    await expect(cart.itemNames).toHaveText(["Sauce Labs Backpack"])
+    await expect(cartPage.itemNames).toHaveText(["Sauce Labs Backpack"])
 
 
 })
