@@ -5,7 +5,7 @@ import {users} from "../test-data/users";
 const authFile = "playwright/.auth/auth.json";
 
 setup("log in as standard_user", async({ page }) => {
-    await page.goto("https://www.saucedemo.com/");
+    await page.goto("/");
     const loginPage =  new LoginPage(page);
     await loginPage.login(users.standard_user.username, users.standard_user.password);
 

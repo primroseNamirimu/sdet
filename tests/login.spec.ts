@@ -10,7 +10,7 @@ import {required} from "../utils/required";
 test.use({ storageState: { cookies:[], origins: []}});
 
 test.beforeEach( async ({ page }) => {
-    await page.goto("https://www.saucedemo.com/");
+    await page.goto("/");
 })
 
 // destructure  both the page and the custom loginPage fixture
@@ -26,7 +26,7 @@ test("User cannot log in with invalid credentials", { tag: "@smoke"}, async( {pa
 
     await loginPage.login(users.invalid_user_login.username,users.invalid_user_login.password);
 
-    await expect(page).toHaveURL("https://www.saucedemo.com");
+    await expect(page).toHaveURL("/");
     // could also be
     await expect(page).not.toHaveURL(/inventory.html/);
 
@@ -78,7 +78,7 @@ test("user can log out", async ({ page, loginPage }) => {
     await loginPage.login(users.standard_user.username, users.standard_user.password);
     await page.getByRole("button", { name: "Open Menu" }).click();
     await page.getByTestId("logout-sidebar-link").click();
-    await expect(page).toHaveURL("https://www.saucedemo.com/");
+    await expect(page).toHaveURL("/");
     await expect(loginPage.loginButton).toBeVisible();
 });
 

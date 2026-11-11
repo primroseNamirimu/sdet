@@ -6,7 +6,7 @@ import {expectedPrices} from "../test-data/products";
 
 
 test.beforeEach( async ({ page }) => {
-    await page.goto("https://www.saucedemo.com/inventory.html");
+    await page.goto("/inventory.html");
 });
 
 
@@ -57,7 +57,7 @@ test("added item appears in cart", async ({ page }) => {
     await page.getByTestId("add-to-cart-sauce-labs-backpack").click();
     await expect(inventoryPage.cartBadge).toHaveText("1")
     await inventoryPage.cart.click()
-    await expect(page).toHaveURL("https://www.saucedemo.com/cart.html")  // are we really on the cart page
+    await expect(page).toHaveURL("/cart.html")  // are we really on the cart page
     await expect(cart.checkoutButton).toBeVisible(); // double check.. doesn't hurt
 
     await expect(cart.itemNames).toHaveText(["Sauce Labs Backpack"])

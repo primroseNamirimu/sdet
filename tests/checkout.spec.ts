@@ -4,7 +4,7 @@ import {CheckoutPage} from "../pages/CheckoutPage";
 import {expectedErrorMessages} from "../test-data/checkout";
 
 test.beforeEach( async ({ page }) => {
-    await page.goto("https://www.saucedemo.com/checkout-step-one.html")
+    await page.goto("/checkout-step-one.html")
 });
 
 
